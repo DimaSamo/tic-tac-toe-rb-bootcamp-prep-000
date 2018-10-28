@@ -38,9 +38,27 @@ def turn(board)
   input = gets.strip
   index = input_to_index(input)
   if valid_move?(board, index)
-    move(board, index, current_player)
+    move(board, index, current_player(board))
     display_board(board)
   else
     turn(board)
+  end
+end
+
+def turn_count(board)
+  counter=0
+  board.each do | pos |
+    if pos == "X" || pos == "O"
+      counter += 1
+    end
+  end
+  return counter
+end
+
+def current_player(board)
+  if turn_count(board) % 2  == 0
+    return "X"
+  else
+    return "O"
   end
 end
